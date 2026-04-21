@@ -1,16 +1,24 @@
 using UnityEngine;
 
-public class NewMonoBehaviourScript : MonoBehaviour
+public class Pusher : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    private Vector3 Initialposition;
+
+    public bool pusherSwitch;
+    public float amplitude = 1f;
+    public float speed = 1f;
+
     void Start()
     {
-        
+        Initialposition = transform.position;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        if (pusherSwitch)
+        {
+            float z = Initialposition.z + Mathf.Sin(Time.time * speed) * amplitude;
+            transform.position = new Vector3(Initialposition.x, Initialposition.y, z);
+        }
     }
 }
