@@ -14,8 +14,16 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int poolMaxSize = 50;
 
     [SerializeField] private TMP_Text coinCountText;
+    [SerializeField] private int startCoinCount = 20;
+    [SerializeField] private Transform fieldCenter;
+    [SerializeField] private Vector2 fieldSize = new Vector2(2f, 2f);
 
     private ObjectPool<GameObject> coinPool;
+
+    void Start()
+    {
+        InitialCoinSpawn();
+    }
 
     void Awake()
     {
@@ -42,6 +50,20 @@ public class GameManager : MonoBehaviour
     void UpdateCoinUI()
     {
         coinCountText.text = $"コイン: {coinCount}";
+    }
+
+    void InitialCoinSpawn()
+    {
+        for (int i = 0; i < startCoinCount; i++)
+        {
+            GameObject coin = coinPool.Get();
+            float x = fieldCenter.position.x + Random.Range(-fieldSize.x / 2f, fieldSize.x / 2f);
+            float z = fieldCenter.position.z + Random.Range(-fieldSize.y / 2f, fieldSize.y / 2f);
+            coin.transform.SetPositionAndRotation(
+                new Vector3(x, fieldCenter.position.y, z),
+                Quaternion.identity
+            );
+        }
     }
 
     void CoinSpawn()
