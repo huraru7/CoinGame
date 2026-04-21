@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour
 
     void UpdateCoinUI()
     {
-        coinCountText.text = $"コイン: {coinCount}";
+        coinCountText.text = $"coin: {coinCount}";
     }
 
     void InitialCoinSpawn()
