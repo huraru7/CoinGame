@@ -105,3 +105,6 @@ InitTestScene*.unity*
 
 # Auto-generated scenes by play mode tests
 /[Aa]ssets/[Ii]nit[Tt]est[Ss]cene*.unity*
+
+# TextMeshPro (Package Managerで管理されるため不要)
+/[Aa]ssets/[Tt]ext[Mm]esh [Pp]ro/

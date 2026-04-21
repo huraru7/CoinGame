@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Pool;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,11 +13,14 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int poolDefaultSize = 10;
     [SerializeField] private int poolMaxSize = 50;
 
+    [SerializeField] private TMP_Text coinCountText;
+
     private ObjectPool<GameObject> coinPool;
 
     void Awake()
     {
         Instance = this;
+        UpdateCoinUI();
         coinPool = new ObjectPool<GameObject>(
             createFunc: () => Instantiate(coinPrefab),
             actionOnGet: obj => obj.SetActive(true),
@@ -35,11 +39,17 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    void UpdateCoinUI()
+    {
+        coinCountText.text = $"コイン: {coinCount}";
+    }
+
     void CoinSpawn()
     {
         GameObject coin = coinPool.Get();
         coin.transform.SetPositionAndRotation(spawnPoint.position, Quaternion.identity);
         coinCount--;
+        UpdateCoinUI();
     }
 
     public void ReleaseCoin(GameObject coin)
@@ -50,5 +60,6 @@ public class GameManager : MonoBehaviour
     public void AddCoin()
     {
         coinCount++;
+        UpdateCoinUI();
     }
 }
