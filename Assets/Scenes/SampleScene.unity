@@ -148,7 +148,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7144ca6799c5f97419add17184e225ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  coinCount: 50
   coinPrefab: {fileID: 4721688990646021724, guid: 15045d56a4d257447a91904e75f26d0c, type: 3}
   spawnPoint: {fileID: 567085275}
   poolDefaultSize: 10
@@ -447,7 +446,7 @@ GameObject:
   - component: {fileID: 497012244}
   - component: {fileID: 497012245}
   m_Layer: 0
-  m_Name: gold
+  m_Name: goal
   m_TagString: Goal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1338,7 +1337,7 @@ GameObject:
   - component: {fileID: 1519369854}
   - component: {fileID: 1519369853}
   m_Layer: 0
-  m_Name: Cube (1)
+  m_Name: Pusher
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1449,7 +1448,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70cba7de1fd4aae4a8f899306174c7ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Pusher
-  pusherSwitch: 1
+  isMoving: 1
   amplitude: 1.5
   speed: 1
 --- !u!54 &1519369854
