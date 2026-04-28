@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class SpawnPointMover : MonoBehaviour
+public class SpawnPointMovement : MonoBehaviour
 {
     public float moveSpeed = 3f;
     public float leftLimit = -2f;
