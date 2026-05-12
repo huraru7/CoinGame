@@ -155,7 +155,7 @@ MonoBehaviour:
   coinCountText: {fileID: 1250388833}
   startCoinCount: 100
   fieldCenter: {fileID: 778186214}
-  fieldSize: {x: 2, y: 2}
+  fieldSize: {x: 8, y: 8}
 --- !u!4 &150435492
 Transform:
   m_ObjectHideFlags: 0

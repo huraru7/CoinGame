@@ -7,12 +7,19 @@ public class SpawnPointMovement : MonoBehaviour
     public float leftLimit = -2f;
     public float rightLimit = 2f;
 
+    private InputSystem_Actions inputActions;
+
+    void Awake()
+    {
+        inputActions = new InputSystem_Actions();
+    }
+
+    void OnEnable()  { inputActions.Player.Enable(); }
+    void OnDisable() { inputActions.Player.Disable(); }
+
     void Update()
     {
-        float input = 0f;
-        if (Keyboard.current[Key.A].isPressed) input = -1f;
-        if (Keyboard.current[Key.D].isPressed) input = 1f;
-
+        float input = inputActions.Player.Move.ReadValue<Vector2>().x;
         if (input == 0f) return;
 
         float newX = Mathf.Clamp(

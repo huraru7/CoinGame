@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Vector2 fieldSize = new Vector2(2f, 2f);
 
     private ObjectPool<GameObject> coinPool;
+    private InputSystem_Actions inputActions;
 
     void Start()
     {
@@ -32,6 +33,7 @@ public class GameManager : MonoBehaviour
             return;
         }
         Instance = this;
+        inputActions = new InputSystem_Actions();
         coinPool = new ObjectPool<GameObject>(
             createFunc: () => Instantiate(coinPrefab),
             actionOnGet: obj => obj.SetActive(true),
@@ -43,12 +45,21 @@ public class GameManager : MonoBehaviour
         UpdateCoinUI();
     }
 
-    void Update()
+    void OnEnable()
     {
-        if (Keyboard.current[Key.Space].wasPressedThisFrame && coinCount > 0)
-        {
-            CoinSpawn();
-        }
+        inputActions.Player.Enable();
+        inputActions.Player.Spawn.performed += OnSpawnPerformed;
+    }
+
+    void OnDisable()
+    {
+        inputActions.Player.Spawn.performed -= OnSpawnPerformed;
+        inputActions.Player.Disable();
+    }
+
+    private void OnSpawnPerformed(InputAction.CallbackContext _)
+    {
+        if (coinCount > 0) CoinSpawn();
     }
 
     void UpdateCoinUI()
@@ -61,8 +72,10 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < startCoinCount; i++)
         {
             GameObject coin = coinPool.Get();
-            float x = fieldCenter.position.x + Random.Range(-fieldSize.x / 2f, fieldSize.x / 2f);
-            float z = fieldCenter.position.z + Random.Range(-fieldSize.y / 2f, fieldSize.y / 2f);
+            float halfFieldX = fieldSize.x / 2f;
+            float halfFieldZ = fieldSize.y / 2f;
+            float x = fieldCenter.position.x + Random.Range(-halfFieldX, halfFieldX);
+            float z = fieldCenter.position.z + Random.Range(-halfFieldZ, halfFieldZ);
             coin.transform.SetPositionAndRotation(
                 new Vector3(x, fieldCenter.position.y, z),
                 Quaternion.identity
